@@ -1,3 +1,4 @@
+@import "~bulma/css/bulma.css";
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -10,4 +11,28 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.hero.has-background {
+  /*position: relative;*/
+  /*overflow: hidden;*/
+}
+
+.hero-background {
+  position: absolute;
+  object-fit: cover;
+  -webkit-user-drag: none;
+  -moz-user-select: none;
+  user-select: none;
+  object-position: center center;
+  width: 100%;
+  height: 100%;
+  /*filter: blur(2.0px);*/
+}
+
+#modal-text {
+  z-index: 1;
+  padding-left: 2rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
 }
