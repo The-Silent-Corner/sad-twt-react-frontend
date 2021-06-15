@@ -1,7 +1,7 @@
 import React from "react";
 import api from "../../api/index";
 import { useDispatch } from "react-redux";
-import { setLoggedIn } from "../../features/counter/loggedInSlice";
+import { setLoggedIn } from "../../Slices/loggedInSlice";
 import { useHistory } from "react-router-dom";
 
 const LoginForm = () => {

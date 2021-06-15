@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import loggedInReducer from "./features/counter/loggedInSlice";
+import loggedInReducer from "./Slices/loggedInSlice";
 
 export default configureStore({
   reducer: {

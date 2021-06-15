@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import api from "../api";
-import { setLoggedIn } from "../features/counter/loggedInSlice";
+import { setLoggedIn } from "../Slices/loggedInSlice";
 
 const Navbar = () => {
   const dispatch = useDispatch();
