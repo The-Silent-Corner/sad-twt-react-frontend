@@ -1,15 +1,31 @@
 import React from "react";
-import api from "@api";
+import api from "../../api/index";
+import { useDispatch } from "react-redux";
+import { setLoggedIn } from "../../features/counter/loggedInSlice";
+import { useHistory } from "react-router-dom";
 
 const LoginForm = () => {
   const [email, setEmail] = React.useState();
   const [password, setPassword] = React.useState();
-  const [userType, setUserType] = React.useState();
+  const [errorsNotification, setErrorsNotificaiton] = React.useState({ hidden: true, message: "" });
+  const dispatch = useDispatch();
+  const history = useHistory();
+  async function onFormSubmitHandler() {
+    document.getElementById("login-button").classList.add("is-loading");
+    const status = await api.postLogin(email, password);
+    document.getElementById("login-button").classList.remove("is-loading");
+    if(status === 200) {
+      dispatch(setLoggedIn(true));
+      history.push("/");
+    } else if(status === 401) {
+      setErrorsNotificaiton({ hidden: false, message: "Invalid credentials." });
+    }
+  }
   return (
     <>
-      <form id="login-form" method="post" onSubmit={e => {
+      <form id="login-form" method="post" onSubmit={async(e) => {
         e.preventDefault();
-        alert(`${email}, ${password}, ${userType}`);
+        await onFormSubmitHandler();
       }}>
         <div className="container column is-half">
           <label htmlFor="login-form" className="label">
@@ -24,28 +40,11 @@ const LoginForm = () => {
               setPassword(e.target.value);
             }} />
           </label>
-          <div className="control column container has-text-centered" id="login-radio">
-            <label htmlFor="login-form" className="radio">
-              <input type="radio" name="type" value="student" required className="radio-login-check" onClick={() => {
-                setUserType("student");
-              }}/>
-              Student
-            </label>
-            <label htmlFor="login-form" className="radio">
-              <input type="radio" name="type" value="tutor" required className="radio-login-check" onClick={() => {
-                setUserType("tutor");
-              }}/>
-              Tutor
-            </label>
-            <label htmlFor="login-form" className="radio">
-              <input type="radio" name="type" value="parent" required className="radio-login-check" onClick={() => {
-                setUserType("parent");
-              }} />
-              Parent
-            </label>
-          </div>
           <div className="container column has-text-centered">
-            <button className="button">Login</button>
+            <div className="notification is-danger is-light" hidden={errorsNotification.hidden} >
+              { errorsNotification.message }
+            </div>
+            <button id={"login-button"} className="button">Login</button>
           </div>
         </div>
       </form>
