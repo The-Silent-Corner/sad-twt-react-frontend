@@ -1,12 +1,19 @@
 import React from "react";
 import api from "../api";
 import Navbar from "../Components/Navbar";
+import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 const RegisterPage = () => {
   const [email, setEmail] = React.useState();
   const [p1, setPW1] = React.useState();
   const [p2, setPW2] = React.useState();
   const [errorsNotification, setErrorsNotification] = React.useState({ hidden: true, message: "" });
+  const history = useHistory();
+  const { loggedIn } = useSelector(state => state);
+  if(loggedIn.value === true) {
+    history.push("/");
+  }
   return (
     <>
       <Navbar />
