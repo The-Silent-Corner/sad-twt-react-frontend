@@ -13,8 +13,7 @@ export const loggedInSlice = createSlice({
 });
 
 export const {
-  setLoggedIn,
-  unsetLoggedIn
+  setLoggedIn
 } = loggedInSlice.actions;
 
 export default loggedInSlice.reducer;

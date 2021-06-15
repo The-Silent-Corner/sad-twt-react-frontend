@@ -26,6 +26,7 @@ export default {
   logout: async function() {
     try {
       await axios.post("/logout");
+      localStorage.removeItem("login_iat");
     } catch(err) {
       alert("Unable to logout from the server");
     }
