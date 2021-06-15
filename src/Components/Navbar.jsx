@@ -19,7 +19,6 @@ const Navbar = () => {
             <a className="navbar-item" onClick={ async(e) => {
               e.preventDefault();
               await api.logout();
-              localStorage.removeItem("login_iat");
               dispatch(setLoggedIn(false));
             } }>Logout</a>
           </nav>
