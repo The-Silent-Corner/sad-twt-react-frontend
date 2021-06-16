@@ -24,11 +24,12 @@ export default {
     }
   },
   logout: async function() {
+    // localStorage.removeItem("login_iat");
     try {
       await axios.post("/logout");
-      localStorage.removeItem("login_iat");
     } catch(err) {
-      alert("Unable to logout from the server");
+      // Spice up later.
+      alert("Something went wrong");
     }
   }
 };
