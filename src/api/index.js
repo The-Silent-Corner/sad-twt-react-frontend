@@ -24,6 +24,7 @@ export default {
     }
   },
   logout: async function() {
+    // localStorage.removeItem("login_iat");
     try {
       await axios.post("/logout");
     } catch(err) {

@@ -70,6 +70,7 @@ export default function HomepageMenu() {
         {createMenuListItem(ComponentMappings.linkedChildrenAccounts)}
         {createMenuListItem(ComponentMappings.changePassword)}
         <li><a onClick={async() => {
+          localStorage.removeItem("login_iat");
           dispatch(setLoggedIn(false));
         }
         }>Logout</a></li>
