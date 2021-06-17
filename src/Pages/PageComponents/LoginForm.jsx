@@ -2,18 +2,21 @@ import React from "react";
 import api from "../../api/index";
 import { useDispatch } from "react-redux";
 import { setLoggedIn } from "../../Slices/loggedInSlice";
+import { useHistory } from "react-router-dom";
 
 const LoginForm = () => {
   const [email, setEmail] = React.useState();
   const [password, setPassword] = React.useState();
   const [errorsNotification, setErrorsNotification] = React.useState({ hidden: true, message: "" });
   const dispatch = useDispatch();
+  const history = useHistory();
   async function onFormSubmitHandler() {
     document.getElementById("login-button").classList.add("is-loading");
     const status = await api.postLogin(email, password);
     document.getElementById("login-button").classList.remove("is-loading");
     if(status === 200) {
       dispatch(setLoggedIn(true));
+      history.replace("/");
     } else if(status === 401) {
       setErrorsNotification({ hidden: false, message: "Invalid credentials." });
     }

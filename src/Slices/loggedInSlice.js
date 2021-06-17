@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import api from "../api";
 
 export const loggedInSlice = createSlice({
   name: "loggedIn",
@@ -7,6 +8,12 @@ export const loggedInSlice = createSlice({
   },
   reducers: {
     setLoggedIn: (state, action) => {
+      if(action.payload === false) {
+        api.logout()
+          .then(() => {
+            localStorage.removeItem("login_iat");
+          });
+      }
       state.value = action.payload;
     }
   }

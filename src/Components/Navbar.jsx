@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import api from "../api";
 import { setLoggedIn } from "../Slices/loggedInSlice";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -18,7 +18,6 @@ const Navbar = () => {
           <nav className="navbar-end" id="navbar">
             <a className="navbar-item" onClick={ async(e) => {
               e.preventDefault();
-              await api.logout();
               dispatch(setLoggedIn(false));
             } }>Logout</a>
           </nav>
@@ -32,13 +31,13 @@ const Navbar = () => {
         <nav className="navbar is-fixed-top" role="navigation">
           <nav className="navbar-start">
             <div className="navbar-brand">
-              <a href="/" className="navbar-item title">TRUSTWORTHY TUTORS</a>
+              <Link to={{ pathname: "/" }} className="navbar-item title">TRUSTWORTHY TUTORS</Link>
             </div>
           </nav>
           <nav className="navbar-end" id="navbar">
-            <a href="/" className="navbar-item">Home</a>
-            <a href="/register" className="navbar-item">Register</a>
-            <a href="/login" className="navbar-item">Login</a>
+            <Link to={{ pathname: "/" }} className="navbar-item">Home</Link>
+            <Link to={{ pathname: "/register" }} className="navbar-item">Register</Link>
+            <Link to={{ pathname: "/login" }} className="navbar-item">Login</Link>
           </nav>
         </nav>
       </>

@@ -7,10 +7,10 @@ const Homepage = () => {
   const loggedIn = useSelector((state) => state.loggedIn.value);
   if(!loggedIn) {
     return (
-      DefaultHomepage()
+      <DefaultHomepage />
     );
   } else {
-    return LoggedInHomepage();
+    return <LoggedInHomepage />;
   }
 };
 

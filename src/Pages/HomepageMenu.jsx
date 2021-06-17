@@ -1,5 +1,4 @@
 import React from "react";
-import api from "../api";
 import { useDispatch } from "react-redux";
 import { setLoggedIn } from "../Slices/loggedInSlice";
 import { setRightComponent } from "../Slices/menuRightComponentSlice";
@@ -72,7 +71,6 @@ export default function HomepageMenu() {
         {createMenuListItem(ComponentMappings.linkedChildrenAccounts)}
         {createMenuListItem(ComponentMappings.changePassword)}
         <li><a onClick={async() => {
-          localStorage.removeItem("login_iat");
           dispatch(setLoggedIn(false));
         }
         }>Logout</a></li>
