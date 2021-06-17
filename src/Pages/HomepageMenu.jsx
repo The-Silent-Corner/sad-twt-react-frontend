@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setLoggedIn } from "../Slices/loggedInSlice";
 import { setRightComponent } from "../Slices/menuRightComponentSlice";
 import ComponentMappings from "../Components/MenuListComponents/ComponentMappings";
@@ -7,7 +7,8 @@ import ComponentMappings from "../Components/MenuListComponents/ComponentMapping
 export default function HomepageMenu() {
   const [activeMenuList, setActiveMenuList] = React.useState();
   const dispatch = useDispatch();
-  function setMenuListActive(e) {
+  const menuRightComponent = useSelector(state => state.menuRightComponent.value);
+  function setActive(e) {
     if(e.target === activeMenuList) return;
     e.target.classList.add("is-active");
     if(activeMenuList) {
@@ -19,22 +20,20 @@ export default function HomepageMenu() {
   }
   /**
    * @function createMenuListItem
-   * @param {String} htmlStr
-   * @param {String} rightColumnComponent
+   * @param {String} rightComponent
    * @returns {JSX.Element}
    */
   function createMenuListItem(rightComponent) {
     const item = (
-      <li>
-        <a
-          onClick={(e) => {
-            setMenuListActive(e);
-            dispatch(setRightComponent(rightComponent));
-          }}
-        >
-          {rightComponent}
-        </a>
-      </li>
+      <a
+        onClick={(e) => {
+          setActive(e);
+          dispatch(setRightComponent(rightComponent));
+        }}
+        className={rightComponent === menuRightComponent ? "is-active" : ""}
+      >
+        {rightComponent}
+      </a>
     );
     return item;
   }
